@@ -1,0 +1,57 @@
+ul { list-style-type: none; }
+::selection { background-color: #428bca; color: #fff; }
+::-moz-selection { background-color: #428bca; color: #fff; }
+
+body { margin-top: 50px; }
+.container { max-width: 728px; }
+.content { margin-bottom: 50px; }
+
+.names-nav { background-color: #428bca; }
+  .names-nav .navbar-brand { max-width: 100%; margin-right: 5px; margin-left: -15px; font-size: 26px; color: #fff; }
+  .names-nav .navbar-nav { margin: 0; }
+    .names-nav .navbar-nav > li > a { color: #d4dfe9; }
+  .names-nav .navbar-toggle { border-color: #428bca; }
+  .names-nav .navbar-toggle:hover { background-color: #3a79af; }
+
+.names-line { overflow: hidden; margin: 0 15px 5px; }
+.names-list { margin: 0 15px 5px; }
+.names-list.loading { background-color: gray; }
+  .name { margin-left: 0; margin-right: 0; }
+  .name:hover { background-color: #d9edf7; border-color: #bce8f1; cursor: pointer; } 
+  .name-detail .name:hover { cursor: default; }
+  .name.selected { color: #7e1e15; background-color: #d9edf7; border-color: #bce8f1; }
+    .name .info { display: none; }
+      .name .info .category { font-size: 12px; }
+      .name .info .notes { margin-top: 5px; }
+        .name .info .notes span { font-weight: bold; }
+    .name.selected .info { display: block; margin-top: 5px; }
+    .name .title { margin: 0; }
+    .name .symbol { float: left; width: 20px; margin-right: 5px; font-size: 20px; color: #5cb85c; }
+    .name .symbol.buryat { /*color: #428bca;*/ }
+    .name .sanskrit {  /*color: #f0ad4e;*/ }
+    .name .symbol.tibet { /*color: #5cb85c;*/ }
+    .name .symbol.unknown { /*color: #ccc;*/ }
+
+.form-search { float: none; margin: 10px 15px; padding: 0; }
+  .form-search .input-advanced { display: none; margin-top: 10px; }
+  .form-search .loading { background-color: #357ebd; border-color:#3071a9; }
+  .form-search .advanced { display: none; margin-top: 10px; }
+    .form-search .advanced label { margin-left: 0; }
+    .form-search .adv.active { background-color: #357ebd; }
+
+.alphabet { margin: 0 15px; padding: 0; overflow: hidden; }
+  .alphabet li { float: left; margin-right: 5px; }
+  .alphabet li:last-child { margin-right: 0; }
+  .alphabet li span { color: #5cb85c; }
+
+.badge-all { margin-right: 5px; }
+.badge-all:hover,
+.badge-all:active { cursor: default; background-color: #5cb85c; border-color: #5cb85c; -webkit-box-shadow: none; box-shadow: none; }
+.pagination { margin: 0; }
+
+@media screen and (min-width: 768px) {  
+  .alphabet,
+  .names-list,
+  .names-line { margin-left: 0; margin-right: 0; }
+  .form-search { margin-left: auto; margin-right: auto; }
+}

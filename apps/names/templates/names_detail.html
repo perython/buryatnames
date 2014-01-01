@@ -1,0 +1,29 @@
+{% extends 'names_base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Page Title Catalog' %}{% endblock %}
+
+{% block meta_desc %}{% trans 'Meta Home' %}{% endblock %}
+
+{% block content %}
+    {% include 'search_form.html' %}
+    <div class="names-container">
+      <ul class="name-detail list-group">
+        <li class="list-group-item name selected">
+          <div class="row">
+            <div class="col-lg-4"><h4 class="title">{{ name.title }}</h4></div>
+            <div class="col-lg-8 desc">{{ name.desc }}</div>
+          </div>
+          <div class="row info">
+            <div class="col-lg-12">
+              <p class="category">{{ name.category.name }}</p>
+              {% if name.notes %}
+                <p class="notes"><span>{% trans 'Additional Info' %}</span> {{ name.notes }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+{% endblock %}

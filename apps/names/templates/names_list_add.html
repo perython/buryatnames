@@ -1,0 +1,40 @@
+{% load i18n %}
+  {% if not output_all and names %}
+      <div class="names-line">
+        <p class="btn btn-success pull-left badge-all">
+          {% if not query %}
+            {% blocktrans count counter=total_names %}There is {{ counter }} name{% plural %}There are {{ counter }} name{% endblocktrans %}
+          {% else %}
+            {% blocktrans count counter=total_names %}There is {{ counter }} name found{% plural %}There are {{ counter }} name found{% endblocktrans %}
+          {% endif %}
+        </p>
+        <a href="/catalog/all/" class="btn btn-primary pull-left all">{% trans 'All' %}</a>
+        {% include 'names_pagination.html' %}
+      </div>
+    {% endif %}
+      <ul class="names-list list-group">
+      {% for name in names %}
+        <li class="list-group-item name">
+          <div class="row">
+            <div class="col-lg-4"><h4 class="title">{{ name.title }}</h4></div>
+      	    <div class="col-lg-8 desc">{{ name.desc }}</div>
+      	  </div>
+      	  <div class="row info">
+            <div class="col-lg-12">
+              <p class="category">{{ name.category.name }}</p>
+              {% if name.notes %}
+              <p class="notes"><span>{% trans 'Additional Info' %}</span> {{ name.notes }}</p>
+              {% endif %}
+              <a href="{{ name.get_url }}" title="">{% trans 'Link' %}</a>
+            </div>
+      	  </div>
+        </li>
+      {% empty %}
+        {% trans 'Search Empty' %}
+      {% endfor %}
+      </ul>
+    {% if not output_all and names %}
+      <div class="names-line">
+        {% include 'names_pagination.html' %}
+      </div>
+    {% endif %}

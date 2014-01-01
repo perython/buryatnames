@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Page Title Home' %}{% endblock %}
+
+{% block meta_desc %}{% trans 'Meta Home' %}{% endblock %}
+
+{% block total_names %}{% blocktrans count counter=total_names %}There is <span>{{ counter }}</span> name{% plural %}There are <span>{{ counter }}</span> name{% endblocktrans %}{% endblock %}
+
+{% block content %}
+  {% include 'search_form.html' %}
+{% endblock %}

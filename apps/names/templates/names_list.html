@@ -1,0 +1,27 @@
+{% extends 'names_base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Page Title Catalog' %}{% endblock %}
+
+{% block meta_desc %}{% trans 'Meta Home' %}{% endblock %}
+
+{% block content %}
+    <ul class="alphabet">
+    {% for letter in alphabet %}
+      {% spaceless %}
+      <li>
+   	    {% if request.GET.startswith|capfirst == letter.letter %}
+	        <span>{{ letter.letter }} ({{ letter.count }})</span>
+	      {% else %}
+	        <a href="/catalog/?startswith={{ letter.letter }}">{{ letter.letter }} ({{ letter.count }})</a>
+	      {% endif %}
+	    </li>
+	    {% endspaceless %}
+    {% endfor %}
+    </ul>
+    {% include 'search_form.html' %}
+    <div class="names-container">
+      {% include 'names_list_add.html' %}
+    </div>
+{% endblock %}
