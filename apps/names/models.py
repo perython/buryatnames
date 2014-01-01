@@ -19,25 +19,11 @@ class Name(models.Model):
     gender_male = models.BooleanField(default=True)
     gender_female = models.BooleanField(default=True)
 
-
     def __unicode__(self):
         return 'Name "{0}" ({1})'.format(self.title, self.id)
 
-    def get_url(self):
-        return '/name/{0}'.format(self.title)
-
     def get_edit_url(self):
         return '/admin/names/name/{0}/'.format(self.id)
-
-    def get_prpd_for_json(self):
-        return {
-            'title': self.title,
-            'desc': self.desc,
-            'notes': self.notes,
-            'gender': self.gender,
-            'category': self.category.name,
-            'visible': self.visible,
-        }
 
 
 class Query(models.Model):

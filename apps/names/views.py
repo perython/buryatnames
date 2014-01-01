@@ -28,21 +28,9 @@ class NamesList(ListView):
     template_name = 'names_list.html'
     output_all = False
     startswith = False
-    days_last = 1
+    days_last = 5
 
     def get_context_data(self, **kwargs):
-        """
-        if not LetterCount.objects.exists():
-            l_a = u'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-            for ll in l_a:
-                LetterCount.objects.create(letter=ll.encode('utf-8'))
-
-            letters = LetterCount.objects.all()
-            for letter in letters:
-                letter.count = Name.objects.filter(title__istartswith=letter.letter).count()
-                letter.save()
-        """
-
         alphabet = LetterCount.objects.filter(count__gt=0).order_by('letter')
 
         context = super(NamesList, self).get_context_data(**kwargs)
@@ -50,7 +38,8 @@ class NamesList(ListView):
         context['output_all'] = self.output_all
         context['query'] = self.request.GET.get('query')
         context['categories'] = Category.objects.all()
-        context['current_category_id'] = int(self.request.GET.get('category') if self.request.GET.get('category') else 0)
+        category = self.request.GET.get('category')
+        context['current_category_id'] = int(category if category else 0)
         context['alphabet'] = alphabet
         context['existed_parameters'] = self.get_existed_parameters()
 
@@ -58,7 +47,7 @@ class NamesList(ListView):
         delta = datetime.datetime.now(pytz.utc) - latest_letter_count.date_modified
         if delta.days > self.days_last:
             for letter in alphabet:
-                letter.count = len(Name.objects.filter(visible=True, title__istartswith=letter.letter))
+                letter.count = Name.objects.filter(visible=True, title__istartswith=letter.letter).count()
                 letter.save()
 
         query = self.request.GET.get('query')
@@ -81,7 +70,7 @@ class NamesList(ListView):
         return context
 
     def get_queryset(self):
-        queryset = Name.objects.all().order_by('title')
+        queryset = Name.objects.order_by('title')
 
         query = self.request.GET.get('query')
         female = self.request.GET.get('female')
@@ -90,7 +79,9 @@ class NamesList(ListView):
         startswith = self.request.GET.get('startswith')
 
         if query:
-            queryset = Name.objects.filter(Q(title__icontains=query)|Q(desc__icontains=query)|Q(notes__icontains=query))
+            queryset = queryset.filter(
+                Q(title__icontains=query) | Q(desc__icontains=query) | Q(notes__icontains=query)
+            )
 
         if female and not male:
             queryset = queryset.filter(gender_female=True, gender_male=False)
@@ -98,7 +89,7 @@ class NamesList(ListView):
             queryset = queryset.filter(gender_female=False, gender_male=True)
 
         if category_id:
-            category = Category.objects.filter(id=int(category_id))[0]
+            category = Category.objects.filter(id=int(category_id)).get()
             if category:
                 queryset = queryset.filter(category=category)
 
@@ -117,16 +108,16 @@ class NamesList(ListView):
         category_id = self.request.GET.get('category')
         startswith = self.request.GET.get('startswith')
         if startswith:
-            result.append('startswith=' + startswith)
+            result.append('startswith={0}'.format(startswith))
         if query:
-            result.append('query=' + query)
+            result.append('query={0}'.format(query))
         if male:
             result.append('male=true')
         if female:
             result.append('female=true')
         if category_id:
-            result.append('category=' + str(category_id))
-        return '?' + '&'.join(result)
+            result.append('category={0}'.format(category_id))
+        return '?{0}'.format('&'.join(result)) if result else ''
 
 
 class NameView(DetailView):
@@ -135,8 +126,3 @@ class NameView(DetailView):
     slug_field = 'title'
     slug_url_kwarg = 'name'
     template_name = 'names_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(NameView, self).get_context_data(**kwargs)
-        context['total_names'] = len(self.get_queryset())
-        return context
