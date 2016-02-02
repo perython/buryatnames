@@ -1,5 +1,15 @@
-South==0.7.3
-Django>=1.5,<=1.5.99
-psycopg2
-django-categories==1.2
-pytz
+# web server
+Flask==0.10.1
+
+# orm
+Flask-SQLAlchemy==2.1
+Flask-Migrate==1.6.0
+psycopg2==2.6.1
+
+# misc
+Flask-Login==0.3.2
+Flask-Cors==2.1.2
+python-dateutil==2.4.2
+redis==2.10.5
+marshmallow==2.3.0
+marshmallow-sqlalchemy==0.6.0
