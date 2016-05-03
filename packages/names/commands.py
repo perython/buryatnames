@@ -11,11 +11,13 @@ from dateutil import parser
 
 # Imports from your apps
 from init.database import db
-from .models import Name, Category
+from .models import Name, Category, names_categories_association_table
 
 
 class AddNames(Command):
     def run(self):
+        db.session.query(names_categories_association_table).filter().delete(synchronize_session=False)
+
         Name.query.delete()
         Category.query.delete()
 
@@ -39,7 +41,7 @@ class AddNames(Command):
                 notes = row[7]
                 category_id = row[8]
                 gender_male = row[9] == 't'
-                gender_female = row[10] == 'f'
+                gender_female = row[10] == 't'
 
                 name = Name(
                     title=title,
