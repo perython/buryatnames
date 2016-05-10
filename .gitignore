@@ -1,17 +1,18 @@
-._*
 .idea/*
-uwsgi/
 media/
 .pbundle/
 .DS_Store
 migrations
-logs
+node_modules
+static
+front/src/config.js
+names.csv
 
 *.pyc
 *.sql
 *.swp
-*.mo
-wsgi.py
-uwsgi-options.ini
-settings_production.py
-settings_local.py
+*.iml
+
+webpack-assets.json
+webpack-stats.json
+npm-debug.log
