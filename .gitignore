@@ -3,10 +3,13 @@ media/
 .pbundle/
 .DS_Store
 migrations
+settings/production.py
 node_modules
 static
 front/src/config.js
+uwsgi.ini
 names.csv
+static.tar.gz
 
 *.pyc
 *.sql
