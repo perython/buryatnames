@@ -1,7 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300&subset=latin,cyrillic);
 @import (inline) '../../node_modules/normalize.css/normalize.css';
 
 body {
-  color: #333
+  font-family: 'Open sans';
+  color: #333;
+  background: #f1f4f9;
 }
 
 .wrapper {
@@ -36,8 +39,14 @@ header {
 .names {
   margin: 20px 0;
 
-  .names-total {
+  .names-counter {
     padding: 0 10px;
+    font-weight: 300;
+    font-size: 14px;
+
+    .total-items {
+
+    }
   }
 
   .names-container {
@@ -47,6 +56,61 @@ header {
       width: 280px;
       padding: 10px;
       float: left;
+
+      p {
+        font-weight: 300;
+      }
     }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.74902);
+
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.modal-about {
+  width: 500px;
+
+  .modal-content {
+    p {
+      font-size: 16px;
+      font-weight: 300;
+    }
+  }
+
+  .modal-close {
+    margin: 10px 0;
+  }
+}
+
+.more {
+  margin: 20px 0 40px;
+
+  button {
+    margin: 0 10px;
+    padding: 5px 0;
+    width: 100%;
   }
 }

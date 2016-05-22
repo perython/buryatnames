@@ -17,8 +17,7 @@ const modalStyles = {
 };
 
 const modalText = `
-Небольшой каталог имен и их значений. Большинство из них в основном популярны в республике Бурятия. Основу для каталога составили данные из группы Буддийские имена (http://vk.com/burnames).
-Бурятские имена - понятие довольно растяжимое. Прежде всего потому, что много имен пришли из других регионов и даже стран. Тибетские (санскритские), монгольские, казахские и др. имена составили костяк того множества, которое весьма популярно в Бурятии.
+
 `
 
 class App extends Component {
@@ -71,10 +70,15 @@ class App extends Component {
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={this.toggleModal}
+              className="modal modal-about"
+              overlayClassName="modal-overlay"
               style={modalStyles} >
               <h2>О сайте</h2>
-              <button onClick={this.toggleModal}>close</button>
-              <div>{modalText}</div>
+              <div className="modal-content">
+                <p>Небольшой каталог имен и их значений. Большинство из них в основном популярны в республике Бурятия. Основу для каталога составили данные из группы Буддийские имена (http://vk.com/burnames).</p>
+                <p>Бурятские имена - понятие довольно растяжимое. Прежде всего потому, что много имен пришли из других регионов и даже стран. Тибетские (санскритские), монгольские, казахские и др. имена составили костяк того множества, которое весьма популярно в Бурятии.</p>
+              </div>
+              <button onClick={this.toggleModal} className="modal-close">Закрыть</button>
             </Modal>
           </div>
         </header>
@@ -83,16 +87,17 @@ class App extends Component {
                 onChange={this.handleFilterChange} />
         {isFetching ? <h2>Загрузка ...</h2>
           : <div className="names" style={{ opacity: isFetching ? 0.5 : 1 }}>
-              <div className="names-total">{total}</div>
+              <div className="names-counter">
+                <span class="total-items">{total}</span> имен найдено
+              </div>
               <Names names={names} />
             </div>
         }
-        <p>
-          {!isFetching && isMore ?
-            <button onClick={this.handleLoadMore}>Больше</button>
-            : !isFetching && <p>Больше нет</p>
+        <div className="more">
+          {!isFetching ?
+            <button onClick={this.handleLoadMore} disabled={!isMore}>{isMore ? 'Больше' : 'Больше нет'}</button> : ''
           }
-        </p>
+        </div>
       </div>
     )
   }
