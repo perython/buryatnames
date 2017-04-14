@@ -20,7 +20,7 @@ class AddUser(Command):
 
             email = email.strip()
             if User.query.filter(User.email == email).count():
-                print 'User with email {} already exists'.format(email)
+                print('User with email {} already exists'.format(email))
             else:
                 break
 
