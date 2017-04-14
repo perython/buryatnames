@@ -8,6 +8,7 @@ node_modules
 static
 front/src/config.js
 uwsgi.ini
+uwsgi_app.py
 names.csv
 static.tar.gz
 
