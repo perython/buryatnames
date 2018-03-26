@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 
-const HOST_API = process.env.NODE_ENV === 'production' ? 'http://buryatnames.com' : 'http://localhost:5000'
+const HOST_API = process.env.NODE_ENV === 'production' ? 'https://perython.com' : 'http://localhost:5000'
 
 export const REQUEST_NAMES = 'REQUEST_NAMES'
 export const RECEIVE_NAMES = 'RECEIVE_NAMES'
@@ -62,7 +62,7 @@ export function fetchNames(filter, page) {
       optionsStr += `${key}=${encodeURIComponent(options[key])}`;
     }
 
-    return fetch(`${HOST_API}/api/names?${optionsStr}`)
+    return fetch(`${HOST_API}/api-buryatnames/names?${optionsStr}`)
       .then(response => response.json())
       .then(json => dispatch(receiveNames(filter, json)))
   }
@@ -77,7 +77,7 @@ function receiveCategories(json) {
 
 export function fetchCategories() {
   return dispatch => {
-    return fetch(`${HOST_API}/api/names/categories`)
+    return fetch(`${HOST_API}/api-buryatnames/names/categories`)
       .then(response => response.json())
       .then(json => dispatch(receiveCategories(json)))
   }

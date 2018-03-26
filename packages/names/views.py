@@ -18,7 +18,7 @@ from .models import *
 from .schemas import *
 
 
-names = Blueprint('names', __name__, url_prefix='/api/names')
+names = Blueprint('names', __name__, url_prefix='/api-buryatnames/names')
 
 
 class BooksPublicListView(JSONMethodView):

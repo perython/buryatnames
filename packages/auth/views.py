@@ -19,7 +19,7 @@ from .models import User
 from .schemas import *
 
 
-auth = Blueprint('auth', __name__, url_prefix='/api/auth')
+auth = Blueprint('auth', __name__, url_prefix='/api-buryatnames/auth')
 
 
 @lm.user_loader
